@@ -22,6 +22,10 @@ namespace GestionStageEquipe7.Areas.Stages.Models
         [Display(Description ="Statut de l'employur")]
 
         public bool Actif { get; set; }
-    
+
+        public int TypeEmployeurId { get; set; }
+
+        public TypeEmployeur TypeEmployeur { get; set; }
+
     }
 }
