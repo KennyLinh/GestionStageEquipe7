@@ -23,7 +23,7 @@ namespace GestionStageEquipe7.Areas.Stages.Models
 
         public bool Actif { get; set; }
 
-        public int TypeEmployeurId { get; set; }
+        public int? TypeEmployeurId { get; set; }
 
         public TypeEmployeur TypeEmployeur { get; set; }
 

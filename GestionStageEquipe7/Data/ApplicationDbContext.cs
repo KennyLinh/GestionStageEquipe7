@@ -9,6 +9,12 @@ namespace GestionStageEquipe7.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+
+        #region Employeurs
+        public DbSet<Employeur> Employeur { get; set; }
+        public DbSet<TypeEmployeur> TypeEmployeur { get; set; }
+        #endregion Employeurs
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

@@ -33,9 +33,30 @@ namespace GestionStageEquipe7.Data.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
+                    b.Property<int?>("TypeEmployeurId")
+                        .HasColumnType("int");
+
                     b.HasKey("EmployeurId");
 
+                    b.HasIndex("TypeEmployeurId");
+
                     b.ToTable("Employeur");
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.TypeEmployeur", b =>
+                {
+                    b.Property<int>("TypeEmployeurId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescriptionTypeEmployeur")
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.HasKey("TypeEmployeurId");
+
+                    b.ToTable("TypesEmployeur","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -236,6 +257,13 @@ namespace GestionStageEquipe7.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.Employeur", b =>
+                {
+                    b.HasOne("GestionStageEquipe7.Areas.Stages.Models.TypeEmployeur", "TypeEmployeur")
+                        .WithMany("Employeurs")
+                        .HasForeignKey("TypeEmployeurId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
