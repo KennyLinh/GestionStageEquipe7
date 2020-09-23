@@ -11,7 +11,9 @@ namespace GestionStageEquipe7.Areas.Stages.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid intmployeurId { get; set; }
+        
+
+        public Guid EmployeurId { get; set; }
         [StringLength(200,ErrorMessage ="Vous devez entrez moins de caractères")]
         [Display(Description = "Nom de l'entreprise")]
         
@@ -20,7 +22,6 @@ namespace GestionStageEquipe7.Areas.Stages.Models
         [Display(Description ="Statut de l'employur")]
 
         public bool Actif { get; set; }
-
-        
+    
     }
 }
