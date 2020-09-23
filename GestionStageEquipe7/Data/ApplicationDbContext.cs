@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GestionStageEquipe7.Areas.Stages.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,16 @@ namespace GestionStageEquipe7.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder
+                .Entity<Employeur>()
+                .Property(e => e.EmployeurId)
+                .HasDefaultValueSql("newid()");
+                
+        }
+
     }
 }
