@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GestionStageEquipe7.Models;
 
+
 namespace GestionStageEquipe7.Controllers
 {
     public class HomeController : Controller
