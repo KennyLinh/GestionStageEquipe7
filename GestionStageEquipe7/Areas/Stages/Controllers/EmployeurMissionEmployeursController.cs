@@ -156,7 +156,8 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
             var employeurMissionEmployeur = await _context.EmployeurMissionEmployeur.FindAsync(id);
             _context.EmployeurMissionEmployeur.Remove(employeurMissionEmployeur);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+         return RedirectToAction("Edit", "Employeurs", new { id = employeurMissionEmployeur.EmployeurId });
+
         }
 
         private bool EmployeurMissionEmployeurExists(int id)
