@@ -1,0 +1,30 @@
+﻿@model GestionStageEquipe7.Areas.Stages.Models.EmployeurMissionEmployeur
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EmployeurMissionEmployeur</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Employeurs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Employeurs.EmployeurId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MissionsEmployeur)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MissionsEmployeur.DescriptionMissionEmployeur)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EmployeurMissionEmployeurId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

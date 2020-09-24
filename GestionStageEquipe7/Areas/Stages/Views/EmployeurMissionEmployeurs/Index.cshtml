@@ -1,0 +1,41 @@
+﻿@model IEnumerable<GestionStageEquipe7.Areas.Stages.Models.EmployeurMissionEmployeur>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employeurs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MissionsEmployeur)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employeurs.EmployeurId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionsEmployeur.DescriptionMissionEmployeur)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EmployeurMissionEmployeurId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EmployeurMissionEmployeurId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EmployeurMissionEmployeurId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
