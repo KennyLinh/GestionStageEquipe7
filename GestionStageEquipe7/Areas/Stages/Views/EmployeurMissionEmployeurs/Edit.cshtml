@@ -13,11 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EmployeurMissionEmployeurId" />
-            <div class="form-group">
-                <label asp-for="EmployeurId" class="control-label"></label>
-                <select asp-for="EmployeurId" class="form-control" asp-items="ViewBag.EmployeurId"></select>
-                <span asp-validation-for="EmployeurId" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="EmployeurId" value="@ViewBag.EmployeurId" />
             <div class="form-group">
                 <label asp-for="MissionEmployeurId" class="control-label"></label>
                 <select asp-for="MissionEmployeurId" class="form-control" asp-items="ViewBag.MissionEmployeurId"></select>

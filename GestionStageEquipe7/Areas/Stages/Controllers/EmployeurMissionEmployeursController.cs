@@ -86,7 +86,7 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeurId"] = new SelectList(_context.Employeur, "EmployeurId", "EmployeurId", employeurMissionEmployeur.EmployeurId);
+            ViewData["EmployeurId"] = employeurMissionEmployeur.EmployeurId;
             ViewData["MissionEmployeurId"] = new SelectList(_context.MissionEmployeur, "MissionEmployeurId", "DescriptionMissionEmployeur", employeurMissionEmployeur.MissionEmployeurId);
             return View(employeurMissionEmployeur);
         }
@@ -121,9 +121,9 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "Employeurs", new { id = employeurMissionEmployeur.EmployeurId });
             }
-            ViewData["EmployeurId"] = new SelectList(_context.Employeur, "EmployeurId", "EmployeurId", employeurMissionEmployeur.EmployeurId);
+            ViewData["EmployeurId"] = employeurMissionEmployeur.EmployeurId;
             ViewData["MissionEmployeurId"] = new SelectList(_context.MissionEmployeur, "MissionEmployeurId", "DescriptionMissionEmployeur", employeurMissionEmployeur.MissionEmployeurId);
             return View(employeurMissionEmployeur);
         }
