@@ -36,7 +36,47 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+
+    <h1>Mission de l'employeur</h1>
+   
+    <p>
+        <a asp-action="Create"asp-controller="EmployeurMissionEmployeurs" asp-route-id=@Model.EmployeurId> Create New </a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomEmployeur)
+                </th>
+                <th>
+                    Mission
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+         <tbody>
+            @if(@Model.EmployeursMissionEmployeur != null)
+           {
+            @foreach (var item in @Model.EmployeursMissionEmployeur)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employeurs.NomEmployeur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MissionsEmployeur.DescriptionMissionEmployeur)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "EmployeurMissionEmployeurs", new { id = item.EmployeurMissionEmployeurId }) |
+                        @Html.ActionLink("Delete", "Delete", "EmployeurMissionEmployeurs", new { id = item.EmployeurMissionEmployeurId, id2 = Model.EmployeurId })
+
+                    </td>
+                </tr>
+            }
+           }
+        </tbody>
+
 </div>
 
 @section Scripts {

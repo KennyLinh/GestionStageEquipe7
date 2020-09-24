@@ -72,14 +72,17 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
         }
 
         // GET: Stages/Employeurs/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public IActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employeur = await _context.Employeur.FindAsync(id);
+            // var employeur = await _context.Employeur.FindAsync(id);
+
+            var employeur = _context.Employeur.Where(info => info.EmployeurId == id).Include("EmployeursMissionEmployeur.MissionsEmployeur").FirstOrDefault();
+
             if (employeur == null)
             {
                 return NotFound();
