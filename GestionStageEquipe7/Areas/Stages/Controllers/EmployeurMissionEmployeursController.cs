@@ -48,9 +48,9 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
         }
 
         // GET: Stages/EmployeurMissionEmployeurs/Create
-        public IActionResult Create()
+        public IActionResult Create(Guid Id)
         {
-            ViewData["EmployeurId"] = new SelectList(_context.Employeur, "EmployeurId", "EmployeurId");
+            ViewData["EmployeurId"] = Id;  
             ViewData["MissionEmployeurId"] = new SelectList(_context.MissionEmployeur, "MissionEmployeurId", "DescriptionMissionEmployeur");
             return View();
         }
@@ -66,7 +66,7 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
             {
                 _context.Add(employeurMissionEmployeur);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "Employeurs", new { id = employeurMissionEmployeur.EmployeurId } );
             }
             ViewData["EmployeurId"] = new SelectList(_context.Employeur, "EmployeurId", "EmployeurId", employeurMissionEmployeur.EmployeurId);
             ViewData["MissionEmployeurId"] = new SelectList(_context.MissionEmployeur, "MissionEmployeurId", "DescriptionMissionEmployeur", employeurMissionEmployeur.MissionEmployeurId);
