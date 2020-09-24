@@ -25,10 +25,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated) { 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Stages" asp-controller="Employeurs" asp-action="Index">Entreprises</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            @if (User.IsInRole("Administrateur"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Stages" asp-controller="Employeurs" asp-action="Index">Entreprises</a>
+                                </li>
+                            }
+                            else
+                            {
+                                @if (User.IsInRole("Etudiant"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Stages" asp-controller="Employeurs" asp-action="Index">Etudiants</a>
+                                    </li>
+                                }
+                            }
                         }
                     </ul>
                 </div>
