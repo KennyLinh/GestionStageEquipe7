@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace GestionStageEquipe7.Areas.Stages.Models
 {
+    [Table("Employeurs", Schema = "dbo")]
+
     public class Employeur
     {
         [Key]
@@ -26,6 +28,8 @@ namespace GestionStageEquipe7.Areas.Stages.Models
         public int? TypeEmployeurId { get; set; }
 
         public TypeEmployeur TypeEmployeur { get; set; }
+
+        public ICollection<EmployeurMissionEmployeur> EmployeursMissionEmployeur { get; set; }
 
     }
 }

@@ -17,11 +17,12 @@ namespace GestionStageEquipe7.Areas.Stages.Models
         [Key]
         public int TypeEmployeurId { get; set; }
         [StringLength(150)]
+        [Required(ErrorMessage = "Veuillez indiquer un type d'employeur")]
         [Display(Description = "Type de l'employeur")]
 
         public string DescriptionTypeEmployeur { get; set; }
 
-        public Collection<Employeur> Employeurs { get; set; }
+        public ICollection<Employeur> Employeurs { get; set; }
 
 
 

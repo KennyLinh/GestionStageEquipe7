@@ -4,16 +4,14 @@ using GestionStageEquipe7.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GestionStageEquipe7.Data.Migrations
+namespace GestionStageEquipe7.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200923231208_AjoutClsTypeEmployeur")]
-    partial class AjoutClsTypeEmployeur
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,14 +33,53 @@ namespace GestionStageEquipe7.Data.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<int>("TypeEmployeurId")
+                    b.Property<int?>("TypeEmployeurId")
                         .HasColumnType("int");
 
                     b.HasKey("EmployeurId");
 
                     b.HasIndex("TypeEmployeurId");
 
-                    b.ToTable("Employeur");
+                    b.ToTable("Employeurs","dbo");
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.EmployeurMissionEmployeur", b =>
+                {
+                    b.Property<int>("EmployeurMissionEmployeurId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("EmployeurId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("MissionEmployeurId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeurMissionEmployeurId");
+
+                    b.HasIndex("EmployeurId");
+
+                    b.HasIndex("MissionEmployeurId");
+
+                    b.ToTable("EmployeursMissionsEmployeur","dbo");
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.MissionEmployeur", b =>
+                {
+                    b.Property<int>("MissionEmployeurId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescriptionMissionEmployeur")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("MissionEmployeurId");
+
+                    b.ToTable("MissionsEmployeur","dbo");
                 });
 
             modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.TypeEmployeur", b =>
@@ -53,6 +90,7 @@ namespace GestionStageEquipe7.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescriptionTypeEmployeur")
+                        .IsRequired()
                         .HasColumnType("nvarchar(150)")
                         .HasMaxLength(150);
 
@@ -265,7 +303,20 @@ namespace GestionStageEquipe7.Data.Migrations
                 {
                     b.HasOne("GestionStageEquipe7.Areas.Stages.Models.TypeEmployeur", "TypeEmployeur")
                         .WithMany("Employeurs")
-                        .HasForeignKey("TypeEmployeurId")
+                        .HasForeignKey("TypeEmployeurId");
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.EmployeurMissionEmployeur", b =>
+                {
+                    b.HasOne("GestionStageEquipe7.Areas.Stages.Models.Employeur", "Employeurs")
+                        .WithMany("EmployeursMissionEmployeur")
+                        .HasForeignKey("EmployeurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GestionStageEquipe7.Areas.Stages.Models.MissionEmployeur", "MissionsEmployeur")
+                        .WithMany("EmployeursMissionEmployeur")
+                        .HasForeignKey("MissionEmployeurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

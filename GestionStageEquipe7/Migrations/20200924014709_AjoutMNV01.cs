@@ -1,13 +1,15 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GestionStageEquipe7.Data.Migrations
+namespace GestionStageEquipe7.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class AjoutMNV01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "dbo");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -48,11 +50,39 @@ namespace GestionStageEquipe7.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MissionsEmployeur",
+                schema: "dbo",
+                columns: table => new
+                {
+                    MissionEmployeurId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DescriptionMissionEmployeur = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MissionsEmployeur", x => x.MissionEmployeurId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TypesEmployeur",
+                schema: "dbo",
+                columns: table => new
+                {
+                    TypeEmployeurId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DescriptionTypeEmployeur = table.Column<string>(maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypesEmployeur", x => x.TypeEmployeurId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -73,7 +103,7 @@ namespace GestionStageEquipe7.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -153,6 +183,57 @@ namespace GestionStageEquipe7.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Employeurs",
+                schema: "dbo",
+                columns: table => new
+                {
+                    EmployeurId = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
+                    NomEmployeur = table.Column<string>(maxLength: 200, nullable: true),
+                    Actif = table.Column<bool>(nullable: false),
+                    TypeEmployeurId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employeurs", x => x.EmployeurId);
+                    table.ForeignKey(
+                        name: "FK_Employeurs_TypesEmployeur_TypeEmployeurId",
+                        column: x => x.TypeEmployeurId,
+                        principalSchema: "dbo",
+                        principalTable: "TypesEmployeur",
+                        principalColumn: "TypeEmployeurId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmployeursMissionsEmployeur",
+                schema: "dbo",
+                columns: table => new
+                {
+                    EmployeurMissionEmployeurId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeurId = table.Column<Guid>(nullable: false),
+                    MissionEmployeurId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeursMissionsEmployeur", x => x.EmployeurMissionEmployeurId);
+                    table.ForeignKey(
+                        name: "FK_EmployeursMissionsEmployeur_Employeurs_EmployeurId",
+                        column: x => x.EmployeurId,
+                        principalSchema: "dbo",
+                        principalTable: "Employeurs",
+                        principalColumn: "EmployeurId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeursMissionsEmployeur_MissionsEmployeur_MissionEmployeurId",
+                        column: x => x.MissionEmployeurId,
+                        principalSchema: "dbo",
+                        principalTable: "MissionsEmployeur",
+                        principalColumn: "MissionEmployeurId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +272,24 @@ namespace GestionStageEquipe7.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employeurs_TypeEmployeurId",
+                schema: "dbo",
+                table: "Employeurs",
+                column: "TypeEmployeurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeursMissionsEmployeur_EmployeurId",
+                schema: "dbo",
+                table: "EmployeursMissionsEmployeur",
+                column: "EmployeurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeursMissionsEmployeur_MissionEmployeurId",
+                schema: "dbo",
+                table: "EmployeursMissionsEmployeur",
+                column: "MissionEmployeurId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +310,26 @@ namespace GestionStageEquipe7.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EmployeursMissionsEmployeur",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Employeurs",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "MissionsEmployeur",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "TypesEmployeur",
+                schema: "dbo");
         }
     }
 }
