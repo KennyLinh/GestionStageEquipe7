@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestionStageEquipe7.Areas.Stages.Models;
 using GestionStageEquipe7.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestionStageEquipe7.Areas.Stages.Controllers
 {
     [Area("Stages")]
+    [Authorize]
     public class EmployeursController : Controller
     {
         private readonly ApplicationDbContext _context;
