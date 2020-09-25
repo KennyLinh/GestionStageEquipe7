@@ -21,7 +21,7 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Stages/Employeurs
         public async Task<IActionResult> Index()
         {
@@ -128,7 +128,7 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
             ViewData["TypeEmployeurId"] = new SelectList(_context.TypeEmployeur, "TypeEmployeurId", "TypeEmployeurId", employeur.TypeEmployeurId);
             return View(employeur);
         }
-
+        //
         // GET: Stages/Employeurs/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
