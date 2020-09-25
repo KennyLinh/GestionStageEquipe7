@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestionStageEquipe7.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
         #region Employeurs
