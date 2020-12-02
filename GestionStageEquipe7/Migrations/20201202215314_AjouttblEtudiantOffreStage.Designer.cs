@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionStageEquipe7.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201130025945_AjouttblEtudiantOffreStage")]
+    [Migration("20201202215314_AjouttblEtudiantOffreStage")]
     partial class AjouttblEtudiantOffreStage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,36 @@ namespace GestionStageEquipe7.Migrations
                     b.ToTable("EmployeursMissionsEmployeur","dbo");
                 });
 
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.EtudiantOffreStage", b =>
+                {
+                    b.Property<int>("OffresStageEtudiantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Actif")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DateCandidature")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
+
+                    b.Property<Guid>("OffreStageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OffresStageEtudiantId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("OffreStageId");
+
+                    b.ToTable("EtudiantsOffresStage","dbo");
+                });
+
             modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.MissionEmployeur", b =>
                 {
                     b.Property<int>("MissionEmployeurId")
@@ -82,6 +112,31 @@ namespace GestionStageEquipe7.Migrations
                     b.HasKey("MissionEmployeurId");
 
                     b.ToTable("MissionsEmployeur","dbo");
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.OffresStage", b =>
+                {
+                    b.Property<Guid>("OffreStageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Actif")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OffreStageDateDebut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OffreStageDateFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TitreOffreStage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("OffreStageId");
+
+                    b.ToTable("OffresStage");
                 });
 
             modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.TypeEmployeur", b =>
@@ -323,6 +378,21 @@ namespace GestionStageEquipe7.Migrations
                     b.HasOne("GestionStageEquipe7.Areas.Stages.Models.MissionEmployeur", "MissionsEmployeur")
                         .WithMany("EmployeursMissionEmployeur")
                         .HasForeignKey("MissionEmployeurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.EtudiantOffreStage", b =>
+                {
+                    b.HasOne("GestionStageEquipe7.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("EtudiantOffreStage")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GestionStageEquipe7.Areas.Stages.Models.OffresStage", "OffresStage")
+                        .WithMany("EtudiantOffreStages")
+                        .HasForeignKey("OffreStageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

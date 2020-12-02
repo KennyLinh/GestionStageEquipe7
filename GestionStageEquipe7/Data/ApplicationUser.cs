@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GestionStageEquipe7.Areas.Stages.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,5 +12,7 @@ namespace GestionStageEquipe7.Data
     {
         [StringLength(500)]
         public string Notes { get; set; }
+
+        public ICollection<EtudiantOffreStage> EtudiantOffreStage { get; set; }
     }
 }
