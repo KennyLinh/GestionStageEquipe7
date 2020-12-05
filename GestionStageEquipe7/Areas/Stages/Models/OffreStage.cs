@@ -9,10 +9,15 @@ namespace GestionStageEquipe7.Areas.Stages.Models
 {
     public class OffresStage
     {
+
+        //
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         public Guid OffreStageId { get; set; }
+
+        [ForeignKey("EmployeurId")]
+        public Employeur Employeur { get; set; }
 
         [StringLength(50, ErrorMessage = "Vous devez entrer moins de caractères")]
         [Required(ErrorMessage = "Veuillez indiquer le titre de l'offre de stage")]
@@ -29,6 +34,8 @@ namespace GestionStageEquipe7.Areas.Stages.Models
         [Required(ErrorMessage = "Veuillez indiquer un statut")]
         [Display(Name = "Statut de l'offre de stage")]
         public bool Actif { get; set; }
+
+
 
         public ICollection<EtudiantOffreStage> EtudiantOffreStages { get;set; }
     }

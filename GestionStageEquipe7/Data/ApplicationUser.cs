@@ -10,6 +10,7 @@ namespace GestionStageEquipe7.Data
 {
     public class ApplicationUser : IdentityUser
     {
+        //
         [StringLength(500)]
         public string Notes { get; set; }
 

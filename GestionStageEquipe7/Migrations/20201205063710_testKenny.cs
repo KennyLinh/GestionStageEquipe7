@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestionStageEquipe7.Migrations
 {
-    public partial class AjoutMNV01 : Migration
+    public partial class testKenny : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,8 @@ namespace GestionStageEquipe7.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Notes = table.Column<string>(maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,6 +207,29 @@ namespace GestionStageEquipe7.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OffresStage",
+                columns: table => new
+                {
+                    OffreStageId = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
+                    EmployeurId = table.Column<Guid>(nullable: true),
+                    TitreOffreStage = table.Column<string>(maxLength: 50, nullable: false),
+                    OffreStageDateDebut = table.Column<DateTime>(nullable: false),
+                    OffreStageDateFin = table.Column<DateTime>(nullable: false),
+                    Actif = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OffresStage", x => x.OffreStageId);
+                    table.ForeignKey(
+                        name: "FK_OffresStage_Employeurs_EmployeurId",
+                        column: x => x.EmployeurId,
+                        principalSchema: "dbo",
+                        principalTable: "Employeurs",
+                        principalColumn: "EmployeurId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeursMissionsEmployeur",
                 schema: "dbo",
                 columns: table => new
@@ -231,6 +255,34 @@ namespace GestionStageEquipe7.Migrations
                         principalSchema: "dbo",
                         principalTable: "MissionsEmployeur",
                         principalColumn: "MissionEmployeurId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EtudiantsOffresStage",
+                schema: "dbo",
+                columns: table => new
+                {
+                    OffresStageEtudiantId = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
+                    Id = table.Column<string>(maxLength: 450, nullable: false),
+                    OffreStageId = table.Column<Guid>(nullable: false),
+                    DateCandidature = table.Column<DateTime>(nullable: false),
+                    Actif = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EtudiantsOffresStage", x => x.OffresStageEtudiantId);
+                    table.ForeignKey(
+                        name: "FK_EtudiantsOffresStage_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EtudiantsOffresStage_OffresStage_OffreStageId",
+                        column: x => x.OffreStageId,
+                        principalTable: "OffresStage",
+                        principalColumn: "OffreStageId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -274,6 +326,11 @@ namespace GestionStageEquipe7.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OffresStage_EmployeurId",
+                table: "OffresStage",
+                column: "EmployeurId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employeurs_TypeEmployeurId",
                 schema: "dbo",
                 table: "Employeurs",
@@ -290,6 +347,18 @@ namespace GestionStageEquipe7.Migrations
                 schema: "dbo",
                 table: "EmployeursMissionsEmployeur",
                 column: "MissionEmployeurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EtudiantsOffresStage_Id",
+                schema: "dbo",
+                table: "EtudiantsOffresStage",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EtudiantsOffresStage_OffreStageId",
+                schema: "dbo",
+                table: "EtudiantsOffresStage",
+                column: "OffreStageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -314,17 +383,24 @@ namespace GestionStageEquipe7.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
+                name: "EtudiantsOffresStage",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "MissionsEmployeur",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Employeurs",
-                schema: "dbo");
+                name: "OffresStage");
 
             migrationBuilder.DropTable(
-                name: "MissionsEmployeur",
+                name: "Employeurs",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

@@ -67,10 +67,10 @@ namespace GestionStageEquipe7.Migrations
 
             modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.EtudiantOffreStage", b =>
                 {
-                    b.Property<int>("OffresStageEtudiantId")
+                    b.Property<Guid>("OffresStageEtudiantId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<bool>("Actif")
                         .HasColumnType("bit");
@@ -116,10 +116,14 @@ namespace GestionStageEquipe7.Migrations
                 {
                     b.Property<Guid>("OffreStageId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<bool>("Actif")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("EmployeurId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("OffreStageDateDebut")
                         .HasColumnType("datetime2");
@@ -133,6 +137,8 @@ namespace GestionStageEquipe7.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("OffreStageId");
+
+                    b.HasIndex("EmployeurId");
 
                     b.ToTable("OffresStage");
                 });
@@ -393,6 +399,13 @@ namespace GestionStageEquipe7.Migrations
                         .HasForeignKey("OffreStageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GestionStageEquipe7.Areas.Stages.Models.OffresStage", b =>
+                {
+                    b.HasOne("GestionStageEquipe7.Areas.Stages.Models.Employeur", "Employeur")
+                        .WithMany()
+                        .HasForeignKey("EmployeurId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

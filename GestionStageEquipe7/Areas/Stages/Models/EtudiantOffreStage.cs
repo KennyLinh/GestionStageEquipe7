@@ -11,8 +11,10 @@ namespace GestionStageEquipe7.Areas.Stages.Models
     [Table("EtudiantsOffresStage", Schema = "dbo")]
     public class EtudiantOffreStage
     {
+
+        //
         [Key]
-        public int OffresStageEtudiantId { get; set; }
+        public Guid OffresStageEtudiantId { get; set; }
 
         [StringLength(450)]
         [Required]

@@ -33,6 +33,18 @@ namespace GestionStageEquipe7.Data
                 .Property(e => e.EmployeurId)
                 .HasDefaultValueSql("newid()");
 
+          
+            modelBuilder
+                .Entity<OffresStage>()
+                .Property(e => e.OffreStageId)
+                .HasDefaultValueSql("newid()");
+
+        
+            modelBuilder
+                .Entity<EtudiantOffreStage>()
+                .Property(e => e.OffresStageEtudiantId)
+                .HasDefaultValueSql("newid()");
+
             modelBuilder.Entity<EmployeurMissionEmployeur>().HasKey(cle => new { cle.EmployeurMissionEmployeurId });
 
             // Établir la relation 1:N d'un coté
@@ -55,6 +67,7 @@ namespace GestionStageEquipe7.Data
                 .WithMany(a => a.EmployeursMissionEmployeur)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
 
 
 
