@@ -12,6 +12,7 @@ using GestionStageEquipe7.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using GestionStageEquipe7.Services.Courriels;
 
 namespace GestionStageEquipe7
 {
@@ -36,6 +37,9 @@ namespace GestionStageEquipe7
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService,EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
