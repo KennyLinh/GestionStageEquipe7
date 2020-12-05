@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GestionStageEquipe7.Models;
-
+using GestionStageEquipe7.Services.Courriels;
 
 namespace GestionStageEquipe7.Controllers
 {
@@ -15,9 +15,13 @@ namespace GestionStageEquipe7.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public IEmailService _EmailService { get; }
+        public HomeController(ILogger<HomeController> logger, IEmailService emailService)
         {
+            // Mon commentaire
             _logger = logger;
+            _EmailService = emailService;
+            //UserManager = userManager;
         }
 
         public IActionResult Index()
@@ -25,8 +29,9 @@ namespace GestionStageEquipe7.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<ActionResult> Privacy()
         {
+            Exception erreur = await _EmailService.Send(new EmailMessage { Content = "Allo<br/><br/>Toi", FromAddresses = { new EmailAddress { Address = "linhkenny@live.ca", Name = "Kenny" } }, ToAddresses = { new EmailAddress { Address = "jemai2000@hotmail.com", Name = "Mehdi" } }, Subject = "Test travail" });
             return View();
         }
 
