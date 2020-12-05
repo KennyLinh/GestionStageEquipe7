@@ -23,6 +23,10 @@ namespace GestionStageEquipe7.Areas.Stages.Models
         [Required(ErrorMessage = "Veuillez indiquer le titre de l'offre de stage")]
         public string TitreOffreStage { get; set; }
 
+        [StringLength(500, ErrorMessage = "Vous devez entrer moins de caractères")]
+        [Required(ErrorMessage = "Veuillez indiquer le une courte description de l'offre de stage")]
+        public string DescriptionOffreStage { get; set; }
+
         [Required(ErrorMessage = "Veuillez indiquer la date de début de stage")]
         [Display(Name = "Date début du stage")]
         public DateTime OffreStageDateDebut { get; set; }
