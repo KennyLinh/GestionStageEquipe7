@@ -1,0 +1,53 @@
+﻿@model GestionStageEquipe7.Areas.Stages.Models.OffresStage
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>OffresStage</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TitreOffreStage" class="control-label"></label>
+                <input asp-for="TitreOffreStage" class="form-control" />
+                <span asp-validation-for="TitreOffreStage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionOffreStage" class="control-label"></label>
+                <input asp-for="DescriptionOffreStage" class="form-control" />
+                <span asp-validation-for="DescriptionOffreStage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OffreStageDateDebut" class="control-label"></label>
+                <input asp-for="OffreStageDateDebut" class="form-control" />
+                <span asp-validation-for="OffreStageDateDebut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OffreStageDateFin" class="control-label"></label>
+                <input asp-for="OffreStageDateFin" class="form-control" />
+                <span asp-validation-for="OffreStageDateFin" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Actif" /> @Html.DisplayNameFor(model => model.Actif)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

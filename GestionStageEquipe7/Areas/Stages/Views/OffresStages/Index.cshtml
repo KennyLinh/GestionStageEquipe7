@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GestionStageEquipe7.Areas.Stages.Models.OffresStage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TitreOffreStage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionOffreStage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OffreStageDateDebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OffreStageDateFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actif)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitreOffreStage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionOffreStage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OffreStageDateDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OffreStageDateFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actif)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OffreStageId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OffreStageId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OffreStageId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
