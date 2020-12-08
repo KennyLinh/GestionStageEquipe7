@@ -75,5 +75,7 @@ namespace GestionStageEquipe7.Data
 
         public DbSet<GestionStageEquipe7.Areas.Stages.Models.OffresStage> OffresStage { get; set; }
 
+        public DbSet<GestionStageEquipe7.Areas.Stages.Models.EtudiantOffreStage> EtudiantOffreStage { get; set; }
+
     }
 }
