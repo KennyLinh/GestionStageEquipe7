@@ -64,6 +64,7 @@ namespace GestionStageEquipe7.Areas.Stages.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OffresStageEtudiantId,Id,OffreStageId,DateCandidature,Actif")] EtudiantOffreStage etudiantOffreStage)
         {
+
             if (ModelState.IsValid)
             {
                 etudiantOffreStage.OffresStageEtudiantId = Guid.NewGuid();

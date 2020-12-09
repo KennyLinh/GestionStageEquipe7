@@ -17,17 +17,21 @@ namespace GestionStageEquipe7.Areas.Stages.Models
 
         public Guid EmployeurId { get; set; }
         [StringLength(200,ErrorMessage ="Vous devez entrez moins de caractères")]
-        [Display(Description = "Nom de l'entreprise")]
-        
-        public string NomEmployeur { get; set; }
-        [Required(ErrorMessage ="Veuillez indiquer un statut")]
-        [Display(Description ="Statut de l'employur")]
+     
 
-        public bool Actif { get; set; }
+        [Display(Name = "Nom")]
+        public string NomEmployeur { get; set; }
+
 
         public int? TypeEmployeurId { get; set; }
 
+        [Display(Name = "Type employé")]
         public TypeEmployeur TypeEmployeur { get; set; }
+
+        [Required(ErrorMessage = "Veuillez indiquer un statut")]
+        [Display(Description = "Statut de l'employé")]
+
+        public bool Actif { get; set; }
 
         public ICollection<EmployeurMissionEmployeur> EmployeursMissionEmployeur { get; set; }
 

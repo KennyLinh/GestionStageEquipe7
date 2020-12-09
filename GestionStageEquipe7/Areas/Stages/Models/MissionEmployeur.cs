@@ -14,9 +14,8 @@ namespace GestionStageEquipe7.Areas.Stages.Models
 
         public int MissionEmployeurId { get; set; }
 
-        [StringLength(100, ErrorMessage ="Veuillez entrer moins de caratères")]
-
-        [Required(ErrorMessage ="Veuillez entrer une valeur")]
+        [StringLength(10, ErrorMessage ="Veuillez entrer moins de caratères")]
+        [Required(ErrorMessage ="Veuillez entrer une description detaillé")]
 
         public string DescriptionMissionEmployeur { get; set; }
 

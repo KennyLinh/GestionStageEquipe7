@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Fiche de renseignement d'un stage</h2>
+
+
+
+    <div>
+
+        <form>
+            <div class="container">
+                <h1>Milieu stage</h1>
+                <p>S'il vous plait remplissez ce formulaire pour les offres de stages.</p>
+                <hr>
+
+                <!-- VERIFIER QUE LA LISTE DEROULANTE CONTIENT: Madame, Monsieur ou Autre -->
+                <label for="type"><b>Appel du responsable administratif</b></label>
+                <input type="text" placeholder="Type status" name="type" required>
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="prenom"><b>Prénom</b></label>
+                <input type="text" placeholder="Votre prénom" name="prenom" required>
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="nom"><b>Nom</b></label>
+                <input type="text" placeholder="Votre nom" name="nom" required>
+
+                <!-- VERIFIER QUE LA LISTE DEROULANTE ontient tous les titres (voir le fichier texte pour les titres).
+    Triée en ordre croissant de titre  -->
+                <label for="titre"><b>Titre</b></label>
+                <input type="text" placeholder="Liste deroulante des titres" name="titre" required>
+
+                <!-- VERIFIER QUE LE LIEU A DES SUGGESTION AVEC AUTO COMPLETE -->
+                <label for="lieu"><b>Lieu</b></label>
+                <input type="text" placeholder="lieu avec auto complete" name="titre" required>
+
+                <label for="adresse"><b>Adresse</b></label>
+                <input type="text" placeholder="Votre adresse" name="adresse">
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="ville"><b>Ville</b></label>
+                <input type="text" placeholder="Votre ville" name="ville">
+
+
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="province"><b>Province</b></label>
+                <input type="text" placeholder="Votre province" name="ville">
+
+                <!-- VERIFIER QUE LE CODE POSTAL SOIT TOUJOURS EN MAJUSCULE-->
+                <label for="codePostal"><b>Code postal</b></label>
+                <input type="text" placeholder="Votre code postal" pattern="[A-Z]{1}[0-9]{1}[A-Z]{1}-[0-9]{1}[A-Z]{1}[0-9]{1}" name="codePostal">
+
+                <!-- VERIFIER QUE LE COURRIEL SOIT EN MINISCULE-->
+                <label for="email"><b>Courriel</b></label>
+                <input type="email" placeholder="Votre email" name="email" required>
+
+                <!-- Format valide (Amérique du Nord).  Ajouter les points (.) après la sauvegarde.  Exemple 123.123.1234 -->
+                <label for="telephone"><b>Téléphone</b></label>
+                <input type="tel" id="phone" name="phone" placeholder="514-111-1111" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+
+
+                <label for="poste"><b>Poste</b></label>
+                <input type="text" id="poste" name="poste" placeholder="514-111-1111" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+
+                <!-- Format valide (Amérique du Nord).  Ajouter les points (.) après la sauvegarde.  Exemple 123.123.1234 -->
+                <label for="cellulaire "><b>Cellulaire </b></label>
+                <input type="tel" id="cellulaire" name="cellulaire" placeholder="514-111-1111" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+
+                <!-- Format valide (Amérique du Nord).  Ajouter les points (.) après la sauvegarde.  -->
+                <label for="telecopieur"><b>Télécopieur</b></label>
+                <input type="tel" id="telecopieur" name="telecopieur" placeholder="514-111-1111" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+
+                <div>
+
+                    <button type="submit" class="sauvegarderbtn">Sauvegarder</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Fiche de renseignement d'un stage</h2>
+
+
+
+    <div >
+       
+        <form >
+            <div class="container">
+                <h1>Milieu stage</h1>
+                <p>S'il vous plait remplissez ce formulaire pour les offres de stages.</p>
+                <hr>
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="nomStage"><b>Nom</b></label>
+                <input type="text" placeholder="Nom du stage" name="nomStage" required>
+
+
+                <label for="adresse"><b>Adresse</b></label>
+                <input type="text" placeholder="Votre adresse" name="adresse">
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="ville"><b>Ville</b></label>
+                <input type="text" placeholder="Votre ville" name="ville">
+
+
+
+                <!-- VERIFIER QUE LA PREMIÈRE LETTRE SOIT TOUJOURS EN MAJUSCULE AU MOMENT DE LA SAUVEGARDE -->
+                <label for="province"><b>Province</b></label>
+                <input type="text" placeholder="Votre province" name="ville">
+
+                <!-- VERIFIER QUE LE CODE POSTAL SOIT TOUJOURS EN MAJUSCULE-->
+                <label for="codePostal"><b>Code postal</b></label>
+                <input type="text" placeholder="Votre code postal" pattern="[A-Z]{1}[0-9]{1}[A-Z]{1}-[0-9]{1}[A-Z]{1}[0-9]{1}" name="codePostal">
+
+
+                <!-- IL FAUT FAIRE UNE LISTE DEROULANTE POUR CELUI CI : Liste déroulante des régions administratives (les cherchers sur internet) -->
+                <label for="regionAdministratif"><b>Région administrative</b></label>
+                <input type="text" placeholder="Liste déroulante des régions administratives (les cherchers sur internet)" name="regionAdministratif">
+
+
+
+                <div>
+
+                    <button type="submit" class="sauvegarderbtn">Sauvegarder</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

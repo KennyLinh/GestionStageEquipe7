@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Liste des candidatures</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Ajouter une candiature</a>
 </p>
 <table class="table">
     <thead>
@@ -15,14 +15,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateCandidature)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Actif)
+                @Html.DisplayNameFor(model => model.ApplicationUser)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OffresStage)
             </th>
+
+
             <th>
-                @Html.DisplayNameFor(model => model.ApplicationUser)
+                @Html.DisplayNameFor(model => model.Actif)
             </th>
             <th></th>
         </tr>
@@ -33,14 +36,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateCandidature)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Actif)
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.OffresStage.DescriptionOffreStage)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
+                @Html.DisplayFor(modelItem => item.Actif)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.OffresStageEtudiantId">Edit</a> |

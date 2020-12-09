@@ -23,18 +23,24 @@ namespace GestionStageEquipe7.Areas.Stages.Models
 
         public Guid OffreStageId { get; set; }
 
+        [Display(Name = "Date de candidature")]
         public DateTime DateCandidature { get; set; }
+
+        [ForeignKey("Id")]
+        [Display(Name = "Utilisateur")]
+        public ApplicationUser ApplicationUser { get; set; }
+
+
+
+        [ForeignKey("OffreStageId")]
+        [Display(Name = "Offres Stage")]
+        public OffresStage OffresStage { get; set; }
+
 
         [Required(ErrorMessage = "Veuillez indiquer un statut")]
         [Display(Name = "Statut de la candidature")]
 
         public bool Actif { get; set; }
-
-        [ForeignKey("OffreStageId")]
-        public OffresStage OffresStage { get; set; }
-
-        [ForeignKey("Id")]
-        public ApplicationUser ApplicationUser { get; set; }
 
 
     }
