@@ -33,19 +33,28 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="Stages" asp-controller="Employeurs" asp-action="Index">Entreprises</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Stages" asp-controller="OffresStages" asp-action="Index">Offre de stages</a>
+                                </li>
                             }
                             else
                             {
                                 @if (User.IsInRole("Etudiant"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Stages" asp-controller="Employeurs" asp-action="Index">Employeurs</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Stages" asp-controller="OffresStages" asp-action="Index">Offre de stages</a>
+                                        <a class="nav-link text-dark" asp-area="Stages" asp-controller="EtudiantOffreStages" asp-action="Index">Liste de stages</a>
                                     </li>
                                 }
-                            }
+                                else
+                                {
+                                    @if (User.IsInRole("Employeur"))
+                                    {
+                                         <li class="nav-item">
+                                              <a class="nav-link text-dark" asp-area="Stages" asp-controller="OffresStages" asp-action="Index">Offre de stages</a>
+                                         </li>
+                                    }
+                                }
+                            }               
                         }
                     </ul>
                 </div>

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace GestionStageEquipe7.Areas.Stages.Controllers
 {
     [Area("Stages")]
-    [Authorize(Roles = "Administrateur, Etudiant")]
+    [Authorize(Roles = "Administrateur, Etudiant, Employeur")]
     public class OffresStagesController : Controller
     {
         private readonly ApplicationDbContext _context;
